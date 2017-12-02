@@ -1,0 +1,34 @@
+{
+  "name": "files-compare",
+  "version": "1.0.0",
+  "description": "Check contents of files or stdin to see if they're all equal.",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "bin": {
+    "files-compare": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "babel src --ignore '*.test.js,__tests__/*' -d dist",
+    "test": "jest && yarn test:cli && fails 'yarn test:cli:fails' && yarn test:cli:stdin && fails 'yarn test:cli:stdin:fails' && yarn test:cli:dist && fails 'yarn test:cli:dist:fails'",
+    "test:cli": "babel-node ./src/cli.js ./src/__tests__/__fixtures__/one.txt ./src/__tests__/__fixtures__/two.txt",
+    "test:cli:stdin": "echo 'this is a test\nthese are contents' | babel-node ./src/cli.js ./src/__tests__/__fixtures__/one.txt -",
+    "test:cli:stdin:fails": "echo 'not test\nthese are contents' | babel-node ./src/cli.js ./src/__tests__/__fixtures__/one.txt -",
+    "test:cli:fails": "babel-node ./src/cli.js ./src/__tests__/__fixtures__/one.txt ./src/__tests__/__fixtures__/other.txt",
+    "test:cli:dist": "./dist/cli.js src/__tests__/__fixtures__/one.txt src/__tests__/__fixtures__/two.txt",
+    "test:cli:dist:fails": "./dist/cli.js src/__tests__/__fixtures__/one.txt src/__tests__/__fixtures__/other.txt"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "fails": "^1.0.1",
+    "jest": "^21.2.1",
+    "jest-in-case": "^1.0.2"
+  },
+  "dependencies": {
+    "array-all-equal": "^1.0.0",
+    "babel-polyfill": "^6.26.0",
+    "get-stdin": "^5.0.1",
+    "p-iteration": "^1.1.5"
+  }
+}

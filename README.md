@@ -26,7 +26,7 @@ filesCompare([
   '__fixtures__/three.txt'
 ]).then(equal => {
   console.log(equal) // false
-})A
+})
 
 filesCompare([
   '__fixtures__/one.txt',

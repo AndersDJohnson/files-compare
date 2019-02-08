@@ -12,7 +12,6 @@ const readFilesOrStdIn = async files => map(files, file =>
 )
 
 const filesCompare = async files =>
-  // console.log(await readFilesOrStdIn(files))
   arrayAllEqual(await readFilesOrStdIn(files))
 
 const sync = files =>
